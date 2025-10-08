@@ -1,8 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
-import {
-  MOVIE_REPOSITORY,
-  MovieRepository,
-} from '../../../data/repositories/movie/movie.interface';
+import { MOVIE_REPOSITORY } from '../../../data/repositories/movie/movie.interface';
+import type { MovieRepository } from '../../../data/repositories/movie/movie.interface';
 import { MovieEntity } from '../../entities/movie/movie.entity';
 
 @Injectable()
