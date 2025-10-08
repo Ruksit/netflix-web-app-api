@@ -3,6 +3,7 @@ import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
 import { MovieRepository } from '../../repositories/movie/movie.interface';
 import { MovieEntity } from '../../../domain/entities/movie/movie.entity';
+import type { TmdbListResponse, TmdbMovie } from './tmdb-movie.types';
 
 @Injectable()
 export class TmdbMovieRepository implements MovieRepository {
@@ -10,7 +11,9 @@ export class TmdbMovieRepository implements MovieRepository {
 
   async getPopular(page = 1): Promise<MovieEntity[]> {
     const { data } = await firstValueFrom(
-      this.http.get<{ results: any[] }>('/movie/popular', { params: { page } }),
+      this.http.get<TmdbListResponse<TmdbMovie>>('/movie/popular', {
+        params: { page },
+      }),
     );
 
     return data.results.map((m) => ({
